@@ -41,8 +41,6 @@ const fetchNotes = async () => {
     setLoading(false);
   }
 };
-
-
     fetchNotes();
   }, []);
 
@@ -68,7 +66,7 @@ const fetchNotes = async () => {
           {notes.map((note) => (
             //   we are using noteId as unique identifier
             <Link href={`/notes/noteCard/${note.noteId}`} key={note.noteId}>
-            <Card key={note.noteId}>  
+            <Card>  
               <CardHeader>
                 <CardTitle  className="text-indigo-900">
                   {note.title || "Untitled"}
