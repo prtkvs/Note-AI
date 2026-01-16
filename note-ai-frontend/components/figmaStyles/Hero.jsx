@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section className="w-full py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+        <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-10 p-2 bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
           Smart Notes. Powered by AI.
         </h2>
 

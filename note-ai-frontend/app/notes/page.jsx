@@ -73,7 +73,7 @@ const fetchNotes = async () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 line-clamp-3">
                   {note.content}
                 </p>
               </CardContent>

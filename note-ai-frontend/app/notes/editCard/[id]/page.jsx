@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Sparkles } from "lucide-react";
 
 export default function EditNotePage() {
   const { id } = useParams(); // noteId
@@ -16,6 +17,7 @@ export default function EditNotePage() {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -73,11 +75,50 @@ export default function EditNotePage() {
     return <p className="p-6 text-gray-500">Loading note...</p>;
   }
 
+   const handleAIEnhance = async () => {
+    if (!content.trim()) return;
+
+    setAiLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await api.post(
+        "/ai/enhance",
+        {
+          title,
+          content,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (res.data?.enhancedText) {
+        setContent(res.data.enhancedText);
+      }
+    } catch (err) {
+      console.error("AI enhance failed", err);
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   return (
     <div className="p-6 max-w-3xl mx-auto">
       <Card>
-        <CardHeader>
+        <CardHeader className="flex justify-between ">
           <CardTitle>Edit Note</CardTitle>
+          <Button
+              onClick={handleAIEnhance}
+              variant="outline"
+              disabled={aiLoading}
+              className="text-gray-300 mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-indigo-900 text-sky-100"
+            >
+              <Sparkles className="w-4 h-4 mr-2 text-sky-200" />
+              {aiLoading ? "Improving..." : "Improve with AI"}
+            </Button>
         </CardHeader>
 
         <CardContent className="space-y-4">

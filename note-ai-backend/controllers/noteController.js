@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 const asyncHandler = require("express-async-handler");
 const { constants } = require("../errorConstants");
 
+
 const getNotes = asyncHandler(async (req, res) => {
   const notes = await Note.find({ userId: req.user.userId });
   if (!notes) {
@@ -86,6 +87,8 @@ const deleteNotes = asyncHandler(async (req, res) => {
     message: "Note deleted successfully",
   });
 });
+
+
 
 module.exports = {
   getNotes,

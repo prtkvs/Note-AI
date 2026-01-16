@@ -19,7 +19,6 @@ app.use(
   })
 );
 
-
 dotenv.config();
 connectDB();
 
@@ -41,4 +40,5 @@ app.get("/", (req, res) => {
 const noteRoutes = require("./routes/note/note");
 app.use("/notes", noteRoutes);
 app.use("/users", require("./routes/user/user")); // directly 
+app.use("/ai", require("./routes/ai/ai"));
 app.use(errorHandler);
