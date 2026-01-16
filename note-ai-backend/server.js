@@ -3,6 +3,20 @@ const dotenv = require("dotenv");
 const connectDB = require("./db");
 const bodyParser = require("body-parser");
 const errorHandler = require("./middleware/errorHandler");
+const cors = require("cors");
+
+// Enable CORS for all routes
+const allowedOrigins = [
+  "http://localhost:3000",
+  "deployed-frontend-url.com"
+];
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true
+  })
+);
+
 
 dotenv.config();
 connectDB();
@@ -18,7 +32,7 @@ app.listen(port, () => {
 
 app.get("/", (req, res) => {
   console.log("API is running");
-  res.send("Hello Note Ai");
+  res.send("Hello Note AI Backend");
 });
 
 // routes
