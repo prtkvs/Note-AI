@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Note = require("../models/noteModel");
 const { v4: uuidv4 } = require("uuid");
 const asyncHandler = require("express-async-handler");

@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const Note = require("../../models/noteModel");
 const { getNotes, createNotes, getNotesById, updateNotes, deleteNotes } = require("../../controllers/noteController");
 
 

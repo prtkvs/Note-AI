@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
 
 // routes
 const noteRoutes = require("./routes/note/note");
-// const userRoutes = require("./routes/user/user");
 app.use("/notes", noteRoutes);
-// app.use("/users", userRoutes);
+app.use("/users", require("./routes/user/user")); // directly 
 app.use(errorHandler);
