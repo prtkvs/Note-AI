@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors");
 
+const app = express();
+
 // Enable CORS for all routes
 const allowedOrigins = [
   "http://localhost:3000",
@@ -22,7 +24,7 @@ dotenv.config();
 connectDB();
 
 const port = process.env.PORT;
-const app = express();
+
 app.use(express.json());
 //app.use(bodyParser.urlencoded({ extended: true }));
 
