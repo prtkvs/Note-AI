@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./db");
 const bodyParser = require("body-parser");
+const errorHandler = require("./middleware/errorHandler");
 
 dotenv.config();
 connectDB();
@@ -25,3 +26,4 @@ const noteRoutes = require("./routes/note/note");
 // const userRoutes = require("./routes/user/user");
 app.use("/notes", noteRoutes);
 // app.use("/users", userRoutes);
+app.use(errorHandler);

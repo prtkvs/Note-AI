@@ -1,3 +1,4 @@
+/* Global Error Handler Middleware */
 // This is exactly the point where people either keep copy-pasting try/catch everywhere or step up and structure the backend properly.
 // you have multiple controllers ; you’re repeating the same try/catch + res.status(500) logic everywhere
 // instead, create a centralized error handling middleware that catches errors from all controllers
@@ -7,7 +8,7 @@
 // therefore we use asyncHandler to wrap each controller function because it automatically catches any error thrown inside the async function and passes it to the next middleware (which is our error handler). - Interview Question explanation
 
 
-const { constants } = require("../constants");
+const { constants } = require("../errorConstants");
 const dotenv = require("dotenv").config(); // directly
 
 const errorHandler = (err, req, res, next) => {
