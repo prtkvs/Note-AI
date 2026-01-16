@@ -1,0 +1,14 @@
+const express = require("express");
+const router = express.Router();
+const Note = require("../../models/noteModel");
+const { getNotes, createNotes, getNotesById, updateNotes, deleteNotes } = require("../../controllers/noteController");
+
+
+// get, create notes
+router.route("/").get(getNotes).post(createNotes)
+
+// get, update, delete notes by id
+router.route("/:id").get(getNotesById).patch(updateNotes).delete(deleteNotes);
+
+module.exports = router;
+
