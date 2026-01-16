@@ -55,7 +55,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
   // generate JWT token
     const token = jwt.sign(
-        { userId: user.userId, username: user.username }, // why not using email here? what if user logged in using email? Ans: we can use either email or username to identify user in payload. That means whether user logged in using email or username, we can always get username from DB using email and vice versa. So including both userId and username in payload for flexibility.
+        { userId: user.userId, username: user.username, email: user.email }, // why not using email here? what if user logged in using email? Ans: we can use either email or username to identify user in payload. That means whether user logged in using email or username, we can always get username from DB using email and vice versa. So including both userId and username in payload for flexibility.
         process.env.JWT_SECRET,
         { expiresIn: "12h" }
     );
