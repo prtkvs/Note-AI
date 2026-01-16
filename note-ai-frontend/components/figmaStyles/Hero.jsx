@@ -1,7 +1,16 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export function Hero() {
+    const getStarted = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            window.location.href = "/notes";
+        } else {
+            window.location.href = "/users/register";
+        }
+    }
   return (
     <section className="w-full py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
@@ -15,13 +24,15 @@ export function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link href="https://github.com/prtkvs/Note-AI" target="_blank">
           <Button
             size="lg"
             className="text-base px-8 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-shadow"
+            onClick={getStarted}
           >
-            Check Github
+            Get Started
           </Button>
+           <Link href="https://github.com/prtkvs/Note-AI" target="_blank">
+          <Button variant="outline" className="text-base px-8 bg-gradient-to-r shadow-lg hover:shadow-xl transition-shadow">Check Github</Button>
           </Link>
         </div>
       </div>
