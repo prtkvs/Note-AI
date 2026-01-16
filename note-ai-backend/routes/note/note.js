@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { getNotes, createNotes, getNotesById, updateNotes, deleteNotes } = require("../../controllers/noteController");
+const validateTokenHandler = require("../../middleware/validateTokenHandler");
 
+// protected routes
+router.use(validateTokenHandler);
 
 // get, create notes
 router.route("/").get(getNotes).post(createNotes)

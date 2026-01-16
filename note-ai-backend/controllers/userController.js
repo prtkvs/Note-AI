@@ -3,6 +3,7 @@ const User = require("../models/userModel");
 const { v4: uuidv4 } = require("uuid");
 const { constants } = require("../errorConstants");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const registerUser = asyncHandler(async (req, res) => {
   console.log("Registering new user");
@@ -26,17 +27,51 @@ const registerUser = asyncHandler(async (req, res) => {
   res.status(201).json({
     success: true,
     message: "User registered successfully",
-    user: newUser,
+    user: {
+      userId: newUser.userId,
+      name: newUser.name,
+      username: newUser.username,
+      email: newUser.email,
+    },
   });
 });
 
 const loginUser = asyncHandler(async (req, res) => {
-  res.send("User login");
+    const { identifier, password } = req.body; // identifier can be either email or username
+    if (!identifier || !password) {
+    res.status(constants.VALIDATION_ERROR);
+    throw new Error("Identifier and password are required");
+  }
+    const user = await User.findOne({ $or: [{ email: identifier }, { username: identifier }] });
+    if (!user) {
+    res.status(constants.UNAUTHORIZED);
+    throw new Error("Invalid credentials");
+  }
+
+  const isMatch = await bcrypt.compare(password,user.password);
+    if (!isMatch) {
+    res.status(constants.UNAUTHORIZED);
+    throw new Error("Invalid credentials");
+  }
+  // generate JWT token
+    const token = jwt.sign(
+        { userId: user.userId, username: user.username }, // why not using email here? what if user logged in using email? Ans: we can use either email or username to identify user in payload. That means whether user logged in using email or username, we can always get username from DB using email and vice versa. So including both userId and username in payload for flexibility.
+        process.env.JWT_SECRET,
+        { expiresIn: "12h" }
+    );
+    res.status(200).json({
+      success: true,
+      message: "Login successful",
+      token: token,
+    });
 });
 
 // private
 const currentUser = asyncHandler(async (req, res) => {
-  res.send("Current user details");
+    res.status(200).json({
+        success: true,
+        user: req.user,
+    });
 });
 
 module.exports = {
