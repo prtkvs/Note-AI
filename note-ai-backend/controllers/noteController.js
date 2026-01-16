@@ -67,8 +67,8 @@ const updateNotes = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const updatedNote = await Note.findByIdAndUpdate(
-      id,
+    const updatedNote = await Note.findOneAndUpdate(    // using findByIdAndUpdate leads to casting object into _id but we're using noteId therefore use findOneAndUpdate 
+      { noteId: id },
       { $set: req.body },  // Update only the fields provided in the request body and leave others unchanged
       { new: true, runValidators: true } 
     );
@@ -93,12 +93,10 @@ const updateNotes = async (req, res) => {
   }
 };
 
-
-
 const deleteNotes = async (req, res) => {
     const { id } = req.params;
     try {
-        const deletedNote = await Note.findByIdAndDelete(id);
+        const deletedNote = await Note.findOneAndDelete({ noteId: id }); // here also not using findByIdAndDelete for same reason as above (since it takes mongodb _id not out custom noteId)
         if (!deletedNote) {
             return res.status(404).json({
                 success: false,
