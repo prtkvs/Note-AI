@@ -29,7 +29,6 @@ export default function LoginPage() {
     try {
       const res = await api.post("/users/login", formData);
       localStorage.setItem("token", res.data.token);
-
       router.push("/notes");
     } catch (err) {
       setError(err?.response?.data?.message || "Invalid email or password");
