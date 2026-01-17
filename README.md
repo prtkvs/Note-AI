@@ -240,7 +240,7 @@ Authorization: Bearer <token>
 
 ### 4. AI Enhance
 
-**GET** `/users/ai-enhance`
+**GET** `/users/ai/enhance`
 
 Enhance or improve note content using AI.
 
