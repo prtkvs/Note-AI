@@ -1,7 +1,13 @@
 import axios from "axios";
 
+const backendOrigins = [
+  "http://localhost:7000",
+  "https://note-ai-rk04.onrender.com"
+];
+
 const api = axios.create({
-  baseURL: "http://localhost:7000",
+  baseURL: backendOrigins[1], // Use the deployed backend URL
+
   headers: {
     "Content-Type": "application/json",
   },
