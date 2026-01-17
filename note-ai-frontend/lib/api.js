@@ -6,7 +6,7 @@ const backendOrigins = [
 ];
 
 const api = axios.create({
-  baseURL: backendOrigins[0], // Use the deployed backend URL
+  baseURL: backendOrigins[1], // Use the deployed backend URL
 
   headers: {
     "Content-Type": "application/json",
