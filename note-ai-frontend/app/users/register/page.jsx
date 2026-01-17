@@ -29,8 +29,8 @@ export default function RegisterPage() {
 
     try {
       const res = await api.post("/users/register", formData);
-      localStorage.setItem("token", res.data.token);
-      router.push("/users/login");
+      // localStorage.setItem("token", res.data.token); -> not storing token on registration
+      router.push("/notes");
     } catch (err) {
       setError(
         err?.response?.data?.message || "Registration failed"

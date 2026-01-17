@@ -5,6 +5,7 @@ const { constants } = require("../errorConstants");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+
 const registerUser = asyncHandler(async (req, res) => {
   console.log("Registering new user");
   const { name, username, email, password } = req.body;
@@ -35,6 +36,9 @@ const registerUser = asyncHandler(async (req, res) => {
     },
   });
 });
+// not storing the token while registration, only during login
+// because user might want to verify email first before logging in
+// therefore in frontend after registration we can redirect user to login page
 
 const loginUser = asyncHandler(async (req, res) => {
     const { identifier, password } = req.body; // identifier can be either email or username
