@@ -10,7 +10,7 @@ const app = express();
 // Enable CORS for all routes
 const allowedOrigins = [
   "http://localhost:3000",
-  "deployed-frontend-url.com"
+  "https://note-ai-flame.vercel.app"
 ];
 app.use(
   cors({
