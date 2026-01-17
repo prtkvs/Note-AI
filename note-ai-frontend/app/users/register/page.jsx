@@ -30,7 +30,7 @@ export default function RegisterPage() {
     try {
       const res = await api.post("/users/register", formData);
       localStorage.setItem("token", res.data.token);
-      router.push("/users/login");
+      router.push("/notes");
     } catch (err) {
       setError(
         err?.response?.data?.message || "Registration failed"
